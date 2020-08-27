@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">CallChatBot</string>
+
+    <string name="recive_msg10_text">Yes i love �� this application</string>
+    <string name="recive_msg11_text">Really ? OHHH OMG i love you so much �� �� �� �� ��</string>
+    <string name="recive_msg12_text">My favorite cartoon is Sponge Bob �� ��</string>
+    <string name="recive_msg13_text">Yes Yes Yes �� �� of course</string>
+    <string name="recive_msg14_text">See you again �� �� �� ��</string>
+    <string name="recive_msg15_text">Thank Your for this chat i wish repeat this conversation �� �� ��</string>
+    <string name="recive_msg1_text">Hi �� ! Welcome to my chat ��</string>
+    <string name="recive_msg2_text">Im Good thank you ��</string>
+    <string name="recive_msg3_text">My name is Siren Head ����</string>
+    <string name="recive_msg4_text">Im 200 years ��</string>
+    <string name="recive_msg5_text">mee to sweety �� ��</string>
+    <string name="recive_msg6_text">My form is a British �� ��</string>
+    <string name="recive_msg7_text">i love BURGER LOOL �� �� Yum! Yum! �� �� ��</string>
+    <string name="recive_msg8_text">let me think about joke emmm �� �� �� ��</string>
+    <string name="recive_msg9_text">ohh thank you me to, I love you �� �� ! biiig kiss �� ��</string>
+    <string name="send_msg10_text">Do you Like this Application ?�� �� ��</string>
+    <string name="send_msg11_text">Im a Big fan of you ❤❤❤ 😘😘</string>
+    <string name="send_msg12_text">What your favorite cartoon ??�� ��</string>
+    <string name="send_msg13_text">I will Call you now �� ? �� �� �� ��</string>
+    <string name="send_msg14_text">See you GoodBye</string>
+    <string name="send_msg15_text">Happy Time</string>
+    <string name="send_msg1_text">Hi.. ! 👋🤗</string>
+    <string name="send_msg2_text">How are you 😁😁 ?</string>
+    <string name="send_msg3_text">What your name ? 😁☺</string>
+    <string name="send_msg4_text">How old are you 😀😏 ?</string>
+    <string name="send_msg5_text">Nice to meet you</string>
+    <string name="send_msg6_text">Where are you from ?</string>
+    <string name="send_msg7_text">What kind of food you like 😋😋 ?</string>
+    <string name="send_msg8_text">Tell me a joke ?</string>
+    <string name="send_msg9_text">I love You So much</string>
+
+</resources>

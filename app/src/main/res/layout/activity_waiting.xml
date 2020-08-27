@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_home"
+    tools:context=".WaitingActivity">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="0dp" android:layout_weight="1.6">
+
+            <ImageView android:id="@+id/img_hero_1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_above="@+id/name_hero_1"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginBottom="13dp"
+                android:adjustViewBounds="true"/>
+
+            <TextView android:id="@+id/name_hero_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/num_hero_1"
+                android:gravity="center"
+                android:text="Call Chat Bot"
+                android:textColor="#fff"
+                android:textSize="20sp"/>
+
+            <TextView android:id="@+id/num_hero_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="+21266345664"
+                android:textColor="#fff"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.7"
+            android:weightSum="4">
+
+            <RelativeLayout android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/refuse_button">
+
+                    <TextView android:id="@+id/incoming_call"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
+                        android:text="Incoming Call.."
+                        android:textColor="#fff"
+                        android:textSize="25sp"/>
+
+                </LinearLayout>
+
+                <ImageView android:id="@+id/refuse_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/refuse_call"/>
+
+                <ImageView android:id="@+id/accept_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/linearLayout2"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/accept_call"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
