@@ -31,5 +31,6 @@
     <string name="send_msg7_text">What kind of food you like 😋😋 ?</string>
     <string name="send_msg8_text">Tell me a joke ?</string>
     <string name="send_msg9_text">I love You So much</string>
+    <string name="privacy_url">https://google.com</string>
 
 </resources>

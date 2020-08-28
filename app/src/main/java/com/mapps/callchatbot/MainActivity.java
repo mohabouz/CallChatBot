@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
         Button callButton = findViewById(R.id.call_button);
         Button messengerButton = findViewById(R.id.messenger_button);
         Button videoCallButton = findViewById(R.id.video_call_button);
+        Button privacyButton = findViewById(R.id.privacy_button);
+
         ImageView rateButton = findViewById(R.id.rate_button);
         ImageView moreAppsButton = findViewById(R.id.more_app_button);
         ImageView shareButton = findViewById(R.id.share_button);
@@ -143,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         videoCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +155,15 @@ public class MainActivity extends AppCompatActivity {
                     interstitialAd.loadAd();
                 }
                 CLICKS_COUNTER++;
+            }
+        });
+
+        privacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(getResources().getString(R.string.privacy_url)));
+                startActivity(i);
             }
         });
 

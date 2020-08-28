@@ -71,7 +71,6 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
     TextView msg15Btn;
 
     ScrollView scroll;
-
     AdView adView;
     private InterstitialAd interstitialAd;
 
@@ -253,10 +252,7 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
         msg13Btn.setOnClickListener(this);
         msg14Btn.setOnClickListener(this);
         msg15Btn.setOnClickListener(this);
-
-
     }
-
 
     @Override
     public void onClick(View view) {
@@ -423,7 +419,7 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                 scroll.scrollTo(0, scroll.getBottom());
             }
         },1100);
-//
+
         scroll.post(new Runnable() {
             public void run() {
                 // then wait for the child of the scroll view (normally a LinearLayout) to be laid out
@@ -486,9 +482,9 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    @Override
-    public void onBackPressed() {
-        CustomRateDialog rateDialog = new CustomRateDialog(this);
-        rateDialog.showDialog();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        CustomRateDialog rateDialog = new CustomRateDialog(this);
+//        rateDialog.showDialog();
+//    }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
             android:id="@+id/call_button"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/round_button"
             android:text="Calling"
             android:drawableStart="@drawable/ic_call_black_24dp"
@@ -41,7 +41,7 @@
             android:id="@+id/messenger_button"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/round_button"
             android:text="Messenger"
             android:drawableStart="@drawable/ic_message_24dp"
@@ -53,7 +53,17 @@
             android:layout_height="wrap_content"
             android:background="@drawable/round_button"
             android:text="Call Video"
+            android:layout_marginBottom="10dp"
             android:drawableStart="@drawable/ic_videocam_24dp"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/privacy_button"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:text="Privacy Policy"
+            android:drawableStart="@drawable/ic_assignment_turned_in_black_24dp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
