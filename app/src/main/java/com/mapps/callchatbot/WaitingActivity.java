@@ -48,6 +48,7 @@ public class WaitingActivity extends AppCompatActivity {
                     intent = new Intent(getBaseContext(), CallActivity.class);
                 }
                 startActivity(intent);
+                MainActivity.CLICKS_COUNTER++;
                 finish();
             }
         });

@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.mapps.callchatbot.utils.CustomRateDialog;
+
 public class ChatRoomActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout msgr1;
@@ -70,12 +72,16 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
         ImageView callBtn = findViewById(R.id.call);
         ImageView videoCallBtn = findViewById(R.id.video_call);
 
+        TextView restart = findViewById(R.id.restart);
+        restart.setOnClickListener(this);
+
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(MainActivity.CALL_TYPE, MainActivity.CALL);
                 startActivity(intent);
+                MainActivity.CLICKS_COUNTER++;
             }
         });
 
@@ -85,6 +91,7 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(MainActivity.CALL_TYPE, MainActivity.VIDEO_CALL);
                 startActivity(intent);
+                MainActivity.CLICKS_COUNTER++;
             }
         });
 
@@ -324,6 +331,8 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                     }
                 },1000);
                 break;
+            case R.id.restart:
+                restartConversation();
 
         }
 
@@ -345,5 +354,60 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
         });
+    }
+
+    private void restartConversation() {
+        msg1.setVisibility(View.GONE);
+        msgr1.setVisibility(View.GONE);
+        msg1Btn.setVisibility(View.VISIBLE);
+        msg2.setVisibility(View.GONE);
+        msgr2.setVisibility(View.GONE);
+        msg2Btn.setVisibility(View.VISIBLE);
+        msg3.setVisibility(View.GONE);
+        msgr3.setVisibility(View.GONE);
+        msg3Btn.setVisibility(View.VISIBLE);
+        msg4.setVisibility(View.GONE);
+        msgr4.setVisibility(View.GONE);
+        msg4Btn.setVisibility(View.VISIBLE);
+        msg5.setVisibility(View.GONE);
+        msgr5.setVisibility(View.GONE);
+        msg5Btn.setVisibility(View.VISIBLE);
+        msg6.setVisibility(View.GONE);
+        msgr6.setVisibility(View.GONE);
+        msg6Btn.setVisibility(View.VISIBLE);
+        msg7.setVisibility(View.GONE);
+        msgr7.setVisibility(View.GONE);
+        msg7Btn.setVisibility(View.VISIBLE);
+        msg8.setVisibility(View.GONE);
+        msgr8.setVisibility(View.GONE);
+        msg8Btn.setVisibility(View.VISIBLE);
+        msg9.setVisibility(View.GONE);
+        msgr9.setVisibility(View.GONE);
+        msg9Btn.setVisibility(View.VISIBLE);
+        msg10.setVisibility(View.GONE);
+        msgr10.setVisibility(View.GONE);
+        msg10Btn.setVisibility(View.VISIBLE);
+        msg11.setVisibility(View.GONE);
+        msgr11.setVisibility(View.GONE);
+        msg11Btn.setVisibility(View.VISIBLE);
+        msg12.setVisibility(View.GONE);
+        msgr12.setVisibility(View.GONE);
+        msg12Btn.setVisibility(View.VISIBLE);
+        msg13.setVisibility(View.GONE);
+        msgr13.setVisibility(View.GONE);
+        msg13Btn.setVisibility(View.VISIBLE);
+        msg14.setVisibility(View.GONE);
+        msgr14.setVisibility(View.GONE);
+        msg14Btn.setVisibility(View.VISIBLE);
+        msg15.setVisibility(View.GONE);
+        msgr15.setVisibility(View.GONE);
+        msg15Btn.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        CustomRateDialog rateDialog = new CustomRateDialog(this);
+        rateDialog.showDialog();
     }
 }

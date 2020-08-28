@@ -20,12 +20,16 @@ import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.mapps.callchatbot.utils.CustomRateDialog;
 
 import java.util.Collections;
 
@@ -76,6 +80,16 @@ public class VideoCallActivity extends AppCompatActivity {
 
         VideoView video = findViewById(R.id.videoView);
         textureView = findViewById(R.id.cam_preview);
+
+        ImageView finishCall = findViewById(R.id.finish_call);
+
+        finishCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.CLICKS_COUNTER++;
+                finish();
+            }
+        });
 
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
@@ -221,6 +235,12 @@ public class VideoCallActivity extends AppCompatActivity {
         mBackgroundThread = new HandlerThread("Camera Background");
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+    }
+
+    @Override
+    public void onBackPressed() {
+        CustomRateDialog rateDialog = new CustomRateDialog(this);
+        rateDialog.showDialog();
     }
 
 }

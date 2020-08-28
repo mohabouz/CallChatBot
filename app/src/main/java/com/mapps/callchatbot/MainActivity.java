@@ -2,12 +2,20 @@ package com.mapps.callchatbot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.Toast;
+
+import com.mapps.callchatbot.utils.CustomRateDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static String CALL = "CALL";
     public static String VIDEO_CALL = "VIDEO_CALL";
     public static int CLICKS_COUNTER = 0;
+    private float ratingValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(CALL_TYPE, CALL);
                 startActivity(intent);
+                CLICKS_COUNTER++;
             }
         });
 
@@ -42,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ChatRoomActivity.class);
                 startActivity(intent);
+                CLICKS_COUNTER++;
             }
         });
 
@@ -52,9 +63,107 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(CALL_TYPE, VIDEO_CALL);
                 startActivity(intent);
+                CLICKS_COUNTER++;
             }
         });
 
 
+        rateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder popDialog = new AlertDialog.Builder(MainActivity.this);
+
+                LinearLayout linearLayout = new LinearLayout(MainActivity.this);
+                final RatingBar rating = new RatingBar(MainActivity.this);
+
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                rating.setLayoutParams(lp);
+                rating.setNumStars(5);
+                rating.setStepSize(1);
+
+                //add ratingBar to linearLayout
+                linearLayout.addView(rating);
+
+
+                popDialog.setIcon(android.R.drawable.btn_star_big_on);
+                popDialog.setTitle("Add Rating: ");
+
+                //add linearLayout to dailog
+                popDialog.setView(linearLayout);
+
+
+
+                rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                        ratingValue = v;
+                        System.out.println("Rated val:"+v);
+                    }
+                });
+
+                // Button OK
+                popDialog.setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(ratingValue >= 3) {
+                                    final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                    } catch (android.content.ActivityNotFoundException anfe) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                    }
+                                } else {
+                                    Toast.makeText(MainActivity.this , "Thank you." , Toast.LENGTH_SHORT).show();
+                                }
+
+                                dialog.dismiss();
+                            }
+
+                        })
+
+                        // Button Cancel
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                popDialog.create();
+                popDialog.show();
+            }
+        });
+
+        moreAppsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), MoreAppsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Check out this cool application : https://play.google.com/store/apps/details?id=" + getPackageName());
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
+
     }
+
+    @Override
+    public void onBackPressed() {
+        CustomRateDialog rateDialog = new CustomRateDialog(this);
+        rateDialog.showDialog();
+    }
+
 }

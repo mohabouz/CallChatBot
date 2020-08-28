@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.mapps.callchatbot.utils.CustomRateDialog;
+
 public class CallActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
@@ -23,6 +25,7 @@ public class CallActivity extends AppCompatActivity {
         finishCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.CLICKS_COUNTER++;
                 finish();
             }
         });
@@ -42,5 +45,11 @@ public class CallActivity extends AppCompatActivity {
         super.onDestroy();
         mediaPlayer.stop();
         mediaPlayer.release();
+    }
+
+    @Override
+    public void onBackPressed() {
+        CustomRateDialog rateDialog = new CustomRateDialog(this);
+        rateDialog.showDialog();
     }
 }

@@ -1,0 +1,32 @@
+[
+  {
+    "app_name" : "App1",
+    "app_package_name" : "com.example.app1",
+    "app_icon" : "icon.png"
+  },
+  {
+    "app_name" : "App2",
+    "app_package_name" : "com.example.app2",
+    "app_icon" : "icon.png"
+  },
+  {
+    "app_name" : "App3",
+    "app_package_name" : "com.example.app3",
+    "app_icon" : "icon.png"
+  },
+  {
+    "app_name" : "App4",
+    "app_package_name" : "com.example.app4",
+    "app_icon" : "icon.png"
+  },
+  {
+    "app_name" : "App5",
+    "app_package_name" : "com.example.app5",
+    "app_icon" : "icon.png"
+  },
+  {
+    "app_name" : "App6",
+    "app_package_name" : "com.example.app6",
+    "app_icon" : "icon.png"
+  }
+]
