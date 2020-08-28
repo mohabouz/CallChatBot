@@ -29,6 +29,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.mapps.callchatbot.utils.CustomRateDialog;
 
 import java.util.Collections;
@@ -54,6 +58,8 @@ public class VideoCallActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
+
+    private InterstitialAd interstitialAd;
 
     CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
@@ -83,9 +89,46 @@ public class VideoCallActivity extends AppCompatActivity {
 
         ImageView finishCall = findViewById(R.id.finish_call);
 
+        interstitialAd = new InterstitialAd(getBaseContext(), "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
+        interstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+
+
         finishCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(MainActivity.CLICKS_COUNTER%MainActivity.CLICK_THRESHOLD == 0){
+                    interstitialAd.loadAd();
+                }
                 MainActivity.CLICKS_COUNTER++;
                 finish();
             }

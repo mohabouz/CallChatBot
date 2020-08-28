@@ -15,6 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
+import com.facebook.ads.NativeAd;
+import com.facebook.ads.NativeAdListener;
+import com.facebook.ads.NativeAdView;
 import com.mapps.callchatbot.utils.CustomRateDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,12 +32,84 @@ public class MainActivity extends AppCompatActivity {
     public static String CALL = "CALL";
     public static String VIDEO_CALL = "VIDEO_CALL";
     public static int CLICKS_COUNTER = 0;
+    public static int CLICK_THRESHOLD = 2;
     private float ratingValue;
+
+    private NativeAd nativeAd;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AudienceNetworkAds.initialize(this);
+
+
+        nativeAd = new NativeAd(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
+        nativeAd.setAdListener(new NativeAdListener(){
+
+            @Override
+            public void onMediaDownloaded(Ad ad) {
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                View adView = NativeAdView.render(MainActivity.this, nativeAd);
+                LinearLayout nativeAdContainer = (LinearLayout) findViewById(R.id.native_container);
+                nativeAdContainer.addView(adView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 800));
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+        nativeAd.loadAd();
+
+        interstitialAd = new InterstitialAd(getBaseContext(), "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
+        interstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
 
         Button callButton = findViewById(R.id.call_button);
         Button messengerButton = findViewById(R.id.messenger_button);
@@ -43,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(CALL_TYPE, CALL);
                 startActivity(intent);
+                if(CLICKS_COUNTER%CLICK_THRESHOLD == 0){
+                    interstitialAd.loadAd();
+                }
                 CLICKS_COUNTER++;
             }
         });
@@ -52,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ChatRoomActivity.class);
                 startActivity(intent);
+                if(MainActivity.CLICKS_COUNTER%CLICK_THRESHOLD == 0){
+                    interstitialAd.loadAd();
+                }
                 CLICKS_COUNTER++;
             }
         });
@@ -63,10 +150,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(CALL_TYPE, VIDEO_CALL);
                 startActivity(intent);
+                if(MainActivity.CLICKS_COUNTER%CLICK_THRESHOLD == 0){
+                    interstitialAd.loadAd();
+                }
                 CLICKS_COUNTER++;
             }
         });
-
 
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override

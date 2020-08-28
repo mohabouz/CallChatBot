@@ -11,7 +11,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.mapps.callchatbot.utils.CustomRateDialog;
 
 public class ChatRoomActivity extends AppCompatActivity implements View.OnClickListener {
@@ -64,10 +72,75 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
 
     ScrollView scroll;
 
+    AdView adView;
+    private InterstitialAd interstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+
+        interstitialAd = new InterstitialAd(getBaseContext(), "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Toast.makeText(getBaseContext(), "Error: " + adError.getErrorMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Ad loaded callback
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+            }
+        });
+
+        interstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
 
         ImageView callBtn = findViewById(R.id.call);
         ImageView videoCallBtn = findViewById(R.id.video_call);
@@ -81,7 +154,11 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(MainActivity.CALL_TYPE, MainActivity.CALL);
                 startActivity(intent);
+                if(MainActivity.CLICKS_COUNTER%MainActivity.CLICK_THRESHOLD == 0){
+                    interstitialAd.loadAd();
+                }
                 MainActivity.CLICKS_COUNTER++;
+
             }
         });
 
@@ -91,6 +168,9 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(getBaseContext(), WaitingActivity.class);
                 intent.putExtra(MainActivity.CALL_TYPE, MainActivity.VIDEO_CALL);
                 startActivity(intent);
+                if(MainActivity.CLICKS_COUNTER%MainActivity.CLICK_THRESHOLD == 0){
+                    interstitialAd.loadAd();
+                }
                 MainActivity.CLICKS_COUNTER++;
             }
         });
@@ -332,6 +412,7 @@ public class ChatRoomActivity extends AppCompatActivity implements View.OnClickL
                 },1000);
                 break;
             case R.id.restart:
+                interstitialAd.loadAd();
                 restartConversation();
 
         }
